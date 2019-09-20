@@ -18,16 +18,14 @@ function App() {
   let newAwayScore;
   let seconds;
 
-  let countDown = useEffect(() => {    
-    if (clockSeconds !== 0) {
-      setInterval(() => clockSecondsChange(clockSeconds - 1), 1000);
-    } else {
-      return clockSecondsChange('Game Over');}
-    })
+  // let countDown = useEffect(() => {    
+  //   if (clockSeconds !== 0) {      
+  //     setInterval(() => clockSecondsChange(clockSeconds - 1), 1000);
+  //   } else {
+  //     return clockSecondsChange('Game Over');}
+  //   })
 
-  
-
-  return (
+    return (
     <div className="container">
       <div className="buttons">        
         <button className="homeButtons__touchdown" onClick={() => {
@@ -61,7 +59,8 @@ function App() {
           if (isNaN(newAwayScore)) {
             newAwayScore = prompt('That is not a number. Enter a number.')
           }
-          awayScoreCount(newAwayScore);
+          awayScoreCount(newAwayScore)
+          //countDown();
         }}>
           Away Team Score
         </button>
@@ -75,7 +74,7 @@ function App() {
           } else if (seconds > 59) {
             seconds = prompt('Please enter a number less than 60.')
           } else {
-          countDown();}          
+          clockSecondsChange(seconds);}          
         }}>
           Seconds
         </button>
