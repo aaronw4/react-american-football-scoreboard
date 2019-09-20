@@ -1,5 +1,5 @@
 //TODO: STEP 1 - Import the useState hook.
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./App.css";
 import BottomRow from "./BottomRow";
 
@@ -11,10 +11,21 @@ function App() {
   const [awayScore, awayScoreCount] = React.useState(32);
   const [homeName, homeNameChange] = React.useState('Lions');
   const [awayName, awayNameChange] = React.useState('Tigers');
+  const [clockSeconds, clockSecondsChange] = React.useState(55);
   let newHomeName = '';
   let newAwayName = '';  
   let newHomeScore;
   let newAwayScore;
+  let seconds;
+
+  let countDown = useEffect(() => {    
+    if (clockSeconds !== 0) {
+      setInterval(() => clockSecondsChange(clockSeconds - 1), 1000);
+    } else {
+      return clockSecondsChange('Game Over');}
+    })
+
+  
 
   return (
     <div className="container">
@@ -56,6 +67,20 @@ function App() {
         </button>
       </div>
 
+      <div className='buttons'>
+        <button className='homeButtons_touchdown' onClick={() => {
+          seconds = prompt('How many seconds are left in the quarter?')
+          if (isNaN(seconds)) {
+            seconds = prompt('That is not a number. Enter a number.')
+          } else if (seconds > 59) {
+            seconds = prompt('Please enter a number less than 60.')
+          } else {
+          countDown();}          
+        }}>
+          Seconds
+        </button>
+      </div>
+
       <section className="scoreboard">
         <div className="topRow">
           <div className="home">
@@ -66,7 +91,7 @@ function App() {
 
             <div className="home__score">{homeScore}</div>
           </div>
-          <div className="timer">00:03</div>
+          <div className="timer">00:{clockSeconds}</div>
           <div className="away">
             <h2 className="away__name">{awayName}</h2>
             <div className="away__score">{awayScore}</div>
