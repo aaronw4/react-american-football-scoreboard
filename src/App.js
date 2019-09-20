@@ -11,43 +11,49 @@ function App() {
   const [awayScore, awayScoreCount] = React.useState(32);
   const [homeName, homeNameChange] = React.useState('Lions');
   const [awayName, awayNameChange] = React.useState('Tigers');
-
+  let newHomeName = '';
+  let newAwayName = '';  
+  let newHomeScore;
+  let newAwayScore;
 
   return (
     <div className="container">
-      <div>
-        <form onSubmit={homeNameChange}>
-          <label>
-            Home team's name?
-            <input type='text' name='homeTeam'/>
-          </label>         
-          <input type='submit' value='Submit' onChange={homeName}></input>          
-        </form>
-
-        <form>
-          <label>Away team's name?
-          <input type='text' name='awayTeam'/>
-          </label>
-          <input type='submit' value='Submit'></input>
-        </form>
+      <div className="buttons">        
+        <button className="homeButtons__touchdown" onClick={() => {
+          newHomeName = prompt('What is the name of the home team?')
+          homeNameChange(newHomeName);
+        }}>
+          Home Team Name
+        </button>
+        
+        <button className="homeButtons__touchdown" onClick={() => {
+          newAwayName = prompt('What is the name of the away team?')
+          awayNameChange(newAwayName);
+        }}>
+          Home Team Name
+        </button>
       </div>
 
-      <div>
-        <form>
-          <label>
-            Home team's points?
-            <input type='text' name='homePoints'/>
-          </label>
-          <input type='submit' value='Submit'></input>
-        </form>
-
-        <form>
-          <label>
-            Away team's points?
-            <input type='text' name='awayPoints'/>
-          </label>
-          <input type='submit' value='Submit'></input>
-        </form>
+      <div className="buttons">        
+        <button className="homeButtons__touchdown" onClick={() => {
+          newHomeScore = prompt('How many points does the home team have?');
+          if (isNaN(newHomeScore)) {
+            newHomeScore =  prompt('That is not a number. Enter a number.')
+          }
+          homeScoreCount(newHomeScore);
+        }}>
+          Home Team Score
+        </button>
+        
+        <button className="homeButtons__touchdown" onClick={() => {
+          newAwayScore = prompt('How many points does the away team have?');
+          if (isNaN(newAwayScore)) {
+            newAwayScore = prompt('That is not a number. Enter a number.')
+          }
+          awayScoreCount(newAwayScore);
+        }}>
+          Away Team Score
+        </button>
       </div>
 
       <section className="scoreboard">
