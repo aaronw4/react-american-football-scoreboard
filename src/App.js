@@ -18,12 +18,13 @@ function App() {
   let newAwayScore;
   let seconds;
 
-  // let countDown = useEffect(() => {    
-  //   if (clockSeconds !== 0) {      
-  //     setInterval(() => clockSecondsChange(clockSeconds - 1), 1000);
-  //   } else {
-  //     return clockSecondsChange('Game Over');}
-  //   })
+  let countDown = useEffect(() => {    
+    if (clockSeconds !== 0) {      
+      const timer = setInterval(() => clockSecondsChange(clockSeconds - 1), 1000);
+      return () => clearInterval(timer)
+    } else {
+      return clockSecondsChange('Game Over');}
+    },[clockSeconds])
 
     return (
     <div className="container">
