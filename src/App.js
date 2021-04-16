@@ -7,19 +7,19 @@ import BottomRow from "./BottomRow";
 function App() {
   //TODO: STEP 2 - Establish your applictaion's state with some useState hooks.  
   //You'll need one for the home score and another for the away score.
-  const [homeScore, homeScoreCount] = React.useState(32);
-  const [awayScore, awayScoreCount] = React.useState(32);
-  const [homeName, homeNameChange] = React.useState('Lions');
-  const [awayName, awayNameChange] = React.useState('Tigers');
-  const [clockSeconds, clockSecondsChange] = React.useState(55);
+  const [homeScore, homeScoreCount] = useState(32);
+  const [awayScore, awayScoreCount] = useState(32);
+  const [homeName, homeNameChange] = useState('Lions');
+  const [awayName, awayNameChange] = useState('Tigers');
+  const [clockSeconds, clockSecondsChange] = useState(0);
   let newHomeName = '';
   let newAwayName = '';  
   let newHomeScore;
   let newAwayScore;
   let seconds;
 
-  let countDown = useEffect(() => {    
-    if (clockSeconds !== 0) {      
+  useEffect(() => {    
+    if (clockSeconds > 0) {      
       const timer = setInterval(() => clockSecondsChange(clockSeconds - 1), 1000);
       return () => clearInterval(timer)
     } else {
@@ -103,19 +103,19 @@ function App() {
         <div className="homeButtons">
           {/* TODO STEP 4 - Now we need to attach our state setter functions to click listeners. */}
           <button className="homeButtons__touchdown" onClick={() => {
-            homeScoreCount(homeScore + 7);
+            homeScoreCount(Number(homeScore) + 7);
             }}>Home Touchdown          
           </button>
           <button className="homeButtons__fieldGoal" onClick={() => {
-            homeScoreCount(homeScore + 3);
+            homeScoreCount(Number(homeScore) + 3);
             }}>Home Field Goal</button>
         </div>
         <div className="awayButtons">
           <button className="awayButtons__touchdown" onClick={() => {
-            awayScoreCount(awayScore + 7);
+            awayScoreCount(Number(awayScore) + 7);
             }}>Away Touchdown</button>
           <button className="awayButtons__fieldGoal" onClick={() => {
-            awayScoreCount(awayScore + 3);
+            awayScoreCount(Number(awayScore) + 3);
             }}>Away Field Goal</button>
         </div>
       </section>
